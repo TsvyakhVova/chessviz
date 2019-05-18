@@ -1,5 +1,5 @@
-#ifndef PRINT_H
-#define PRINT_H
+#ifndef BOARD_PRINT_PLAIN_H
+#define BOARD_PRINT_PLAIN_H
 
 #include <iomanip>
 #include <iostream>
