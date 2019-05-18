@@ -1,3 +1,5 @@
+#include "board.h"
+#include "board_print_plain.h"
 #include <iomanip>
 #include <iostream>
 #include <stdio.h>

@@ -1,3 +1,5 @@
+#include "board.h"
+
 void ChessField(char field[][9])
 {
     for (int i = 0; i < 9; i++) {

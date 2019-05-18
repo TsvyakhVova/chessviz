@@ -1,5 +1,5 @@
-#ifndef CHESS_H
-#define CHESS_H
+#ifndef BOARD_H
+#define BOARD_H
 
 #include <iomanip>
 #include <iostream>

@@ -1,3 +1,5 @@
+#include "board.h"
+
 void Move(char field[][9])
 {
     int i1 = 9, i2 = 9, j1 = 0, j2 = 0;
