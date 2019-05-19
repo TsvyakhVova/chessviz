@@ -1,3 +1,2 @@
-/a.out
-/helloworld
-/chessviz
+*.o
+bin/main
