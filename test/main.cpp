@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 int t1();
+int t2();
 
 int main(int argc, const char** argv)
 {
@@ -9,7 +10,11 @@ int main(int argc, const char** argv)
 
     ltest = t1();
     result += !ltest;
-    fprintf(stderr, " Проверка на a9 : %s\n", ltest ? "TRUE" : "FALSE");
+    fprintf(stderr, " Проверка на a9 : %s\n", ltest ? "GOOD" : "BAD");
+
+    ltest = t1();
+    result += !ltest;
+    fprintf(stderr, " Проверка хода a1-a2 : %s\n", ltest ? "GOOD" : "BAD");
 
     return result;
 }
