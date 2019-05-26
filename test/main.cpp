@@ -3,6 +3,7 @@
 int t1();
 int t2();
 int t3();
+int t4();
 
 int main(int argc, const char** argv)
 {
@@ -20,6 +21,10 @@ int main(int argc, const char** argv)
     ltest = t3();
     result += !ltest;
     fprintf(stderr, " Проверка хода a2-a3 : %s\n", ltest ? "GOOD" : "BAD");
+
+    ltest = t4();
+    result += !ltest;
+    fprintf(stderr, " Проверка хода a2-a9 : %s\n", ltest ? "GOOD" : "BAD");
 
     return result;
 }
