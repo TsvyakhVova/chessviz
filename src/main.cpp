@@ -10,20 +10,23 @@ using namespace std;
 
 int main()
 {
-    char field[9][9] = {{'8', 'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
-                        {'7', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
-                        {'6', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                        {'5', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                        {'4', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                        {'3', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                        {'2', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
-                        {'1', 'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'},
-                        {' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'}};
-    ChessField(field);
+    char pole[9][9] = {{'8', 'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
+                       {'7', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
+                       {'6', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                       {'5', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                       {'4', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                       {'3', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                       {'2', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
+                       {'1', 'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'},
+                       {' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'}};
+
+    int scorewhite = 0, scoreblack = 0, team = 0;
+    char Maswhite[16], Masblack[16];
+    ChessField(pole);
 
     while (true) {
-        Move(field);
-        ChessField(field);
+        Move(pole, &team, &scorewhite, &scoreblack, Maswhite, Masblack);
+        ChessField(pole);
     }
     return 0;
 }

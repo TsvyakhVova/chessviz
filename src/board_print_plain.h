@@ -9,6 +9,6 @@
 
 using namespace std;
 
-void ChessField(char field[][9]);
+void ChessField(char pole[][9]);
 
 #endif
