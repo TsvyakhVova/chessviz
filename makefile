@@ -5,7 +5,7 @@ DIR_TEST = ./build/test
 DIR_T = ./test
 .PHONY: clean all test run
 
-all: $(DIR_BIN)/main $(DIR_BIN)/testing test $(DIR_BIN)/testing test main1
+all: $(DIR_BIN)/main $(DIR_BIN)/testing test $(DIR_BIN)/ main1
 
 $(DIR_BIN)/main: $(DIR_BUILD)/main.o $(DIR_BUILD)/chess.o $(DIR_BUILD)/print.o
 	g++ -Wall -o $(DIR_BIN)/main $(DIR_BUILD)/main.o $(DIR_BUILD)/chess.o $(DIR_BUILD)/print.o
