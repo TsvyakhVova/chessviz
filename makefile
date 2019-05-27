@@ -18,14 +18,12 @@ $(DIR_BUILD)/board_print_plain.o: $(DIR_SRC)/board_print_plain.cpp
 	g++ -Wall -Werror -o $(DIR_BUILD)/board_print_plain.o -c $(DIR_SRC)/board_print_plain.cpp
 
 
-$(DIR_BIN)/testing: $(DIR_TEST)/main.o $(DIR_TEST)/test.o $(DIR_BUILD)/test.o
-	g++ -o $(DIR_BIN)/testing $(DIR_TEST)/main.o $(DIR_BUILD)/test.o $(DIR_TEST)/test.o
-$(DIR_TEST)/main.o: $(DIR_T)/main.cpp
-	g++ -o $(DIR_TEST)/main.o -c $(DIR_T)/main.cpp 
+$(DIR_BIN)/testing: $(DIR_TEST)/test.o $(DIR_BUILD)/test.o
+	g++ -o $(DIR_BIN)/testing $(DIR_BUILD)/test.o $(DIR_TEST)/test.o -std=c++11
 $(DIR_TEST)/test.o: $(DIR_T)/test.cpp
-	g++ -o $(DIR_TEST)/test.o -c $(DIR_T)/test.cpp    
+	g++ -o $(DIR_TEST)/test.o -c $(DIR_T)/test.cpp -std=c++11
 $(DIR_BUILD)/test.o: $(DIR_SRC)/board.cpp
-	g++ -o $(DIR_BUILD)/test.o -c $(DIR_SRC)/board.cpp
+	g++ -o $(DIR_BUILD)/test.o -c $(DIR_SRC)/board.cpp -std=c++11
 
 run: all
 	$(DIR_BIN)/main
