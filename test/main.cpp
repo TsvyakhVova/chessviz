@@ -1,8 +1,8 @@
+#include "../src/chess.h"
 #define CATCH_CONFIG_MAIN
-#include "../src/board.h"
 #include "../thirdparty/catch/catch.hpp"
 
-TEST_CASE("t1")
+TEST_CASE("Test1")
 {
     REQUIRE(1 == 1);
 }
@@ -22,5 +22,14 @@ TEST_CASE()
     int i1 = 6, j1 = 5, i2 = 5, j2 = 5;
     int result = MoveCheck(0, i1, i2, j1, j2, pole);
     int expected = 1;
+    REQUIRE(expected == result);
+}
+TEST_CASE()
+{
+    int i1 = 6, j1 = 4, i2 = 5, j2 = 5;
+    pole[5][5] = 'r';
+    int result = MoveCheck(0, i1, i2, j1, j2, pole);
+    int expected = 1;
+    pole[5][5] = ' ';
     REQUIRE(expected == result);
 }
