@@ -5,7 +5,6 @@
 TEST_CASE("Test1")
 {
     REQUIRE(1 == 1);
-    printf("tests 1 was successful\n");
 }
 
 char pole[9][9] = {{'8', 'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
