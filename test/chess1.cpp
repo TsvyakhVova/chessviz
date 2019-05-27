@@ -1,387 +1,66 @@
 #include "../src/chess.h"
+#define CATCH_CONFIG_MAIN
+#include "../thirdparty/catch/catch.hpp"
 
-//#include "../thirdparty/ctest.h"
-
-// CTEST(input_step, step_1)
-int test1()
+TEST_CASE("Test1")
 {
-    // Given
-    char pole[9][9] = {{'8', 'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
-                       {'7', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
-                       {'6', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'5', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'4', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'3', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'2', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
-                       {'1', 'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'},
-                       {' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'}};
-
-    const int side = 0;
-    const int i2 = 6;
-    const int j2 = 1;
-
-    // When
-    const int result = FriendlyFire(side, i2, j2, pole);
-
-    // Then
-    const int expected = 0;
-    return expected == result;
-    //    ASSERT_EQUAL(expected, result);
+    REQUIRE(1 == 1);
+    printf("tests 1 was successful\n");
 }
 
-int test2()
+char pole[9][9] = {{'8', 'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
+                   {'7', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
+                   {'6', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                   {'5', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                   {'4', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                   {'3', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                   {'2', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
+                   {'1', 'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'},
+                   {' ', 'a', '6', 'c', 'd', 'e', 'f', 'g', 'h'}};
+
+TEST_CASE("Test2") // move p
 {
-    // Given
-    char pole[9][9] = {{'8', 'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
-                       {'7', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
-                       {'6', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'5', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'4', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'3', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'2', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
-                       {'1', 'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'},
-                       {' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'}};
-
-    const int side = 1;
-    const int i2 = 1;
-    const int j2 = 1;
-
-    // When
-    const int result = FriendlyFire(side, i2, j2, pole);
-
-    // Then
-    const int expected = 0;
-    return expected == result;
-    //    ASSERT_EQUAL(expected, result);
+    int i1 = 6, j1 = 5, i2 = 5, j2 = 5;
+    int result = MoveCheck(0, i1, i2, j1, j2, pole);
+    int expected = 1;
+    REQUIRE(expected == result);
+    printf("tests 2 was successful\n");
 }
-
-int test3()
+TEST_CASE("Test3") // atack p
 {
-    // Given
-    char pole[9][9] = {{'8', 'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
-                       {'7', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
-                       {'6', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'5', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'4', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'3', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'2', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
-                       {'1', 'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'},
-                       {' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'}};
-
-    const int side = 0;
-    const int i2 = 1;
-    const int j2 = 1;
-
-    // When
-    const int result = FriendlyFire(side, i2, j2, pole);
-
-    // Then
-    const int expected = 1;
-    return expected == result;
-    //    ASSERT_EQUAL(expected, result);
+    int i1 = 6, j1 = 4, i2 = 5, j2 = 5;
+    pole[5][5] = 'r';
+    int result = MoveCheck(0, i1, i2, j1, j2, pole);
+    int expected = 1;
+    pole[5][5] = ' ';
+    REQUIRE(expected == result);
+    printf("tests 3 was successful\n");
 }
-
-int test4()
+TEST_CASE("Test4") // hourse left
 {
-    // Given
-    char pole[9][9] = {{'8', 'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
-                       {'7', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
-                       {'6', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'5', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'4', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'3', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'2', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
-                       {'1', 'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'},
-                       {' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'}};
-
-    const int side = 1;
-    const int i2 = 6;
-    const int j2 = 1;
-
-    // When
-    const int result = FriendlyFire(side, i2, j2, pole);
-
-    // Then
-    const int expected = 1;
-    return expected == result;
-    //    ASSERT_EQUAL(expected, result);
+    int i1 = 7, j1 = 2, i2 = 5, j2 = 3;
+    int result = MoveCheck(0, i1, i2, j1, j2, pole);
+    int expected = 1;
+    REQUIRE(expected == result);
+    printf("tests 4 was successful\n");
 }
-
-int test5()
+TEST_CASE("Test5") // elephant left
 {
-    // Given
-    char pole[9][9] = {{'8', 'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
-                       {'7', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
-                       {'6', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'5', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'4', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'3', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'2', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
-                       {'1', 'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'},
-                       {' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'}};
-
-    const int team = 0;
-    const int i1 = 6;
-    const int i2 = 1;
-    const int j1 = 5;
-    const int j2 = 1;
-
-    // When
-    const int result = MoveCheck(team, i1, i2, j2, j2, pole);
-
-    // Then
-    const int expected = 0;
-    return expected == result;
-    //    ASSERT_EQUAL(expected, result);
+    pole[6][4] = ' ';
+    int i1 = 7, j1 = 3, i2 = 5, j2 = 5;
+    int result = MoveCheck(0, i1, i2, j1, j2, pole);
+    int expected = 1;
+    pole[6][4] = 'P';
+    REQUIRE(expected == result);
+    printf("tests 5 was successful\n");
 }
-int test6()
+TEST_CASE("Test6") // king white
 {
-    // Given
-    char pole[9][9] = {{'8', 'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
-                       {'7', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
-                       {'6', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'5', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'4', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'3', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'2', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
-                       {'1', 'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'},
-                       {' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'}};
-
-    const int team = 0;
-    const int i1 = 6;
-    const int i2 = 5;
-    const int j1 = 1;
-    const int j2 = 1;
-
-    // When
-    const int result = MoveCheck(team, i1, i2, j1, j2, pole);
-
-    // Then
-    const int expected = 1;
-    return expected == result;
-    //    ASSERT_EQUAL(expected, result);
-}
-
-int test7()
-{
-    // Given
-    char pole[9][9] = {{'8', 'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
-                       {'7', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
-                       {'6', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'5', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'4', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'3', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'2', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
-                       {'1', 'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'},
-                       {' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'}};
-
-    const int team = 1;
-    const int i1 = 2;
-    const int i2 = 1;
-    const int j1 = 1;
-    const int j2 = 1;
-
-    // When
-    const int result = MoveCheck(team, i1, i2, j1, j2, pole);
-
-    // Then
-    const int expected = 0;
-    return expected == result;
-    //    ASSERT_EQUAL(expected, result);
-}
-
-int test8()
-{
-    // Given
-    char pole[9][9] = {{'8', 'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
-                       {'7', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
-                       {'6', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'5', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'4', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'3', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'2', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
-                       {'1', 'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'},
-                       {' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'}};
-
-    const int team = 1;
-    const int i1 = 7;
-    const int i2 = 6;
-    const int j1 = 1;
-    const int j2 = 1;
-
-    // When
-    const int result = MoveCheck(team, i1, i2, j1, j2, pole);
-
-    // Then
-    const int expected = 0;
-    return expected == result;
-    //    ASSERT_EQUAL(expected, result);
-}
-
-int test9()
-{
-    // Given
-    char pole[9][9] = {{'8', 'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
-                       {'7', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
-                       {'6', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'5', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'4', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'3', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'2', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
-                       {'1', 'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'},
-                       {' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'}};
-
-    const int team = 0;
-    const int i1 = 7;
-    const int i2 = 5;
-    const int j1 = 2;
-    const int j2 = 3;
-
-    // When
-    const int result = MoveCheck(team, i1, i2, j1, j2, pole);
-
-    // Then
-    const int expected = 1;
-    return expected == result;
-    //    ASSERT_EQUAL(expected, result);
-}
-
-int test10()
-{
-    // Given
-    char pole[9][9] = {{'8', 'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
-                       {'7', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
-                       {'6', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'5', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'4', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'3', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'2', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
-                       {'1', 'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'},
-                       {' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'}};
-
-    const int team = 0;
-    const int i1 = 7;
-    const int i2 = 5;
-    const int j1 = 3;
-    const int j2 = 1;
-
-    // When
-    const int result = MoveCheck(team, i1, i2, j1, j2, pole);
-
-    // Then
-    const int expected = 0;
-    return expected == result;
-    //    ASSERT_EQUAL(expected, result);
-}
-
-int test11()
-{
-    // Given
-    char pole[9][9] = {{'8', 'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
-                       {'7', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
-                       {'6', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'5', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'4', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'3', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'2', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
-                       {'1', 'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'},
-                       {' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'}};
-
-    const int team = 0;
-    const int i1 = 7;
-    const int i2 = 6;
-    const int j1 = 4;
-    const int j2 = 4;
-
-    // When
-    const int result = MoveCheck(team, i1, i2, j1, j2, pole);
-
-    // Then
-    const int expected = 0;
-    return expected == result;
-    //    ASSERT_EQUAL(expected, result);
-}
-
-int test12()
-{
-    // Given
-    char pole[9][9] = {{'8', 'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
-                       {'7', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
-                       {'6', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'5', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'4', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'3', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'2', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
-                       {'1', 'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'},
-                       {' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'}};
-
-    const int team = 0;
-    const int i1 = 7;
-    const int i2 = 6;
-    const int j1 = 5;
-    const int j2 = 5;
-
-    // When
-    const int result = MoveCheck(team, i1, i2, j1, j2, pole);
-
-    // Then
-    const int expected = 0;
-    return expected == result;
-    //    ASSERT_EQUAL(expected, result);
-}
-
-int test13()
-{
-    // Given
-    char pole[9][9] = {{'8', 'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
-                       {'7', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
-                       {'6', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'5', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'4', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'3', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'2', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
-                       {'1', 'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'},
-                       {' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'}};
-
-    const int team = 0;
-    const int i1 = 7;
-    const int i2 = 4;
-    const int j1 = 6;
-    const int j2 = 9;
-
-    // When
-    const int result = MoveCheck(team, i1, i2, j1, j2, pole);
-
-    // Then
-    const int expected = 0;
-    return expected == result;
-    //    ASSERT_EQUAL(expected, result);
-}
-
-int test14()
-{
-    // Given
-    char pole[9][9] = {{'8', 'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
-                       {'7', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
-                       {'6', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'5', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'4', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'3', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                       {'2', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
-                       {'1', 'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'},
-                       {' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'}};
-
-    const int team = 0;
-    const int i1 = 6;
-    const int i2 = -1;
-    const int j1 = 1;
-    const int j2 = 1;
-
-    // When
-    const int result = MoveCheck(team, i1, i2, j1, j2, pole);
-
-    // Then
-    const int expected = 0;
-    return expected == result;
-    //    ASSERT_EQUAL(expected, result);
+    pole[6][5] = ' ';
+    int i1 = 7, j1 = 5, i2 = 6, j2 = 5;
+    int result = MoveCheck(0, i1, i2, j1, j2, pole);
+    int expected = 1;
+    pole[6][5] = 'P';
+    REQUIRE(expected == result);
+    printf("tests 6 was successful\n");
 }
