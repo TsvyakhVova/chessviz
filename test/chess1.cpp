@@ -24,7 +24,6 @@ TEST_CASE("Test2") // move p
     int result = MoveCheck(0, i1, i2, j1, j2, pole);
     int expected = 1;
     REQUIRE(expected == result);
-    printf("tests 2 was successful\n");
 }
 TEST_CASE("Test3") // atack p
 {
@@ -34,7 +33,6 @@ TEST_CASE("Test3") // atack p
     int expected = 1;
     pole[5][5] = ' ';
     REQUIRE(expected == result);
-    printf("tests 3 was successful\n");
 }
 TEST_CASE("Test4") // hourse left
 {
@@ -42,7 +40,6 @@ TEST_CASE("Test4") // hourse left
     int result = MoveCheck(0, i1, i2, j1, j2, pole);
     int expected = 1;
     REQUIRE(expected == result);
-    printf("tests 4 was successful\n");
 }
 TEST_CASE("Test5") // elephant left
 {
@@ -52,7 +49,6 @@ TEST_CASE("Test5") // elephant left
     int expected = 1;
     pole[6][4] = 'P';
     REQUIRE(expected == result);
-    printf("tests 5 was successful\n");
 }
 TEST_CASE("Test6") // king white
 {
@@ -62,5 +58,4 @@ TEST_CASE("Test6") // king white
     int expected = 1;
     pole[6][5] = 'P';
     REQUIRE(expected == result);
-    printf("tests 6 was successful\n");
 }
